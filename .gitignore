@@ -1,0 +1,7 @@
+.vscode
+.DS_Store
+.net
+nuget
+bin
+obj
+nupkg
