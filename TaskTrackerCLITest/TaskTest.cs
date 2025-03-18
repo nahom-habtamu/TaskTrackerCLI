@@ -1,29 +1,31 @@
-namespace TaskTrackerCLITest;
-using TaskTrackerCLI;
+using Task = TaskTrackerCLI.Task;
 
-public class TaskTest
+namespace TaskTrackerCLITest
 {
-  [Fact]
-  public void ShouldUpdateStatusAndUpdatedAtFieldWhenMarkedAsCompleted()
+  public class TaskTest
   {
-    var task = new Task("Test task");
-    var updatedAtValueBeforeCompletion = task.UpdatedAt;
+    [Fact]
+    public void ShouldUpdateStatusAndUpdatedAtFieldWhenMarkedAsCompleted()
+    {
+      var task = new Task("Test task");
+      var updatedAtValueBeforeCompletion = task.UpdatedAt;
 
-    task.MarkAsCompleted();
+      task.MarkAsCompleted();
 
-    Assert.Equal("COMPLETED", task.Status);
-    Assert.NotEqual(updatedAtValueBeforeCompletion, task.UpdatedAt);
-  }
+      Assert.Equal("COMPLETED", task.Status);
+      Assert.NotEqual(updatedAtValueBeforeCompletion, task.UpdatedAt);
+    }
 
-  [Fact]
-  public void ShouldUpdateStatusAndUpdatedAtFieldWhenMarkedAsInProgress()
-  {
-    var task = new Task("Test task");
-    var updatedAtValueBeforeBeingMarkedAsInProgress = task.UpdatedAt;
+    [Fact]
+    public void ShouldUpdateStatusAndUpdatedAtFieldWhenMarkedAsInProgress()
+    {
+      var task = new Task("Test task");
+      var updatedAtValueBeforeBeingMarkedAsInProgress = task.UpdatedAt;
 
-    task.MarkAsInProgress();
+      task.MarkAsInProgress();
 
-    Assert.Equal("IN_PROGRESS", task.Status);
-    Assert.NotEqual(updatedAtValueBeforeBeingMarkedAsInProgress, task.UpdatedAt);
+      Assert.Equal("IN_PROGRESS", task.Status);
+      Assert.NotEqual(updatedAtValueBeforeBeingMarkedAsInProgress, task.UpdatedAt);
+    }
   }
 }

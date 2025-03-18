@@ -1,10 +1,10 @@
 namespace TaskTrackerCLI
 {
-  public class Task(string title)
+  public class Task(string title, string status = "DEFAULT")
   {
     public int Id { get; set; }
     public string Title { get; set; } = title;
-    public string Status { get; set; } = "DEFAULT";
+    public string Status { get; set; } = status;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
@@ -19,6 +19,5 @@ namespace TaskTrackerCLI
       Status = "IN_PROGRESS";
       UpdatedAt = DateTime.Now;
     }
-
   }
 }
