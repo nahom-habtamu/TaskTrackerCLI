@@ -34,9 +34,15 @@ namespace TaskTrackerCLI
       Console.WriteLine($"✓ Task marked as in progress");
     }
 
-    public void ListTasks()
+    public void ListTasks(string filterCriteria = "all")
     {
-      var tasks = _storageManager.GetTasks();
+      if (filterCriteria != "all" && filterCriteria != "completed" && filterCriteria != "in-progress")
+      {
+        Console.WriteLine("Invalid filter criteria. Please use 'all', 'completed', or 'in-progress'.");
+        return;
+      }
+
+      var tasks = _storageManager.GetTasks(filterCriteria);
 
       if (tasks.Count == 0)
       {

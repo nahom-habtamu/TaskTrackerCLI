@@ -14,7 +14,11 @@ namespace TaskTrackerCLI
       };
 
       var listCommand = new Command("list", "List all tasks");
-      listCommand.SetHandler(_taskManager.ListTasks);
+      var listCommandArgument = new Argument<string>(
+        "filterCriteria",
+        description: "A filter criteria to list the tasks (all, completed, in-progress)");
+      listCommand.AddArgument(listCommandArgument);
+      listCommand.SetHandler(_taskManager.ListTasks, listCommandArgument);
 
 
       var addCommand = new Command("add", "Add a new task");

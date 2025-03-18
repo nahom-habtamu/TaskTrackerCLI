@@ -56,9 +56,20 @@ namespace TaskTrackerCLI
       }
     }
 
-    public List<Task> GetTasks()
+    public List<Task> GetTasks(string filterCriteria = "all")
     {
-      return LoadTasks();
+      var tasks = LoadTasks();
+
+      if (filterCriteria == "completed")
+      {
+        return [.. tasks.Where(t => t.Status == "COMPLETED")];
+      }
+      else if (filterCriteria == "in-progress")
+      {
+        return [.. tasks.Where(t => t.Status == "IN_PROGRESS")];
+      }
+
+      return tasks;
     }
 
     public void AddTask(Task task)
