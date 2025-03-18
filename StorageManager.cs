@@ -105,5 +105,20 @@ namespace TaskTrackerCLI
       task.MarkAsCompleted();
       SaveTasks(tasks);
     }
+
+    public void MarkTaskAsInProgress(int taskId)
+    {
+      var tasks = LoadTasks();
+      var task = tasks.FirstOrDefault(t => t.Id == taskId);
+
+      if (task == null)
+      {
+        Console.WriteLine("Task not found");
+        return;
+      }
+
+      task.MarkAsInProgress();
+      SaveTasks(tasks);
+    }
   }
 }

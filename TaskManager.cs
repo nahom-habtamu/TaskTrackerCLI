@@ -28,6 +28,12 @@ namespace TaskTrackerCLI
       Console.WriteLine($"✓ Task marked as completed");
     }
 
+    public void MarkTaskAsInProgress(int taskId)
+    {
+      _storageManager.MarkTaskAsInProgress(taskId);
+      Console.WriteLine($"✓ Task marked as in progress");
+    }
+
     public void ListTasks()
     {
       var tasks = _storageManager.GetTasks();
@@ -42,7 +48,7 @@ namespace TaskTrackerCLI
       Console.WriteLine("----------------------------------------");
       foreach (var task in tasks)
       {
-        string status = task.IsCompleted ? "[✓]" : "[ ]";
+        string status = task.Status == "COMPLETED" ? "[✓]" : task.Status == "IN_PROGRESS" ? "[⚙️]" : "[ ]";
         Console.WriteLine($"{task.Id}.{task.Title} {status}");
       }
       Console.WriteLine("----------------------------------------\n");

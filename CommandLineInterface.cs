@@ -13,18 +13,8 @@ namespace TaskTrackerCLI
         Description = "Task Tracker CLI Tool - A versatile command line interface for managing tasks"
       };
 
-
       var listCommand = new Command("list", "List all tasks");
-      var listFormatOption = new Option<string>(
-        "--format",
-        description: "Output format (table, json, csv)",
-        getDefaultValue: () => "table");
-      listCommand.AddOption(listFormatOption);
-      listCommand.SetHandler(format =>
-      {
-        _taskManager.ListTasks();
-
-      }, listFormatOption);
+      listCommand.SetHandler(_taskManager.ListTasks);
 
 
       var addCommand = new Command("add", "Add a new task");
@@ -59,6 +49,19 @@ namespace TaskTrackerCLI
       );
 
 
+      var markAsInProgressCommand =
+        new Command("mark-as-in-progress", "Mark a task as in progress");
+      var markAsInProgressCommandArgument = new Argument<int>(
+        "id",
+        description: "ID of the task to mark as in progress"
+      );
+      markAsInProgressCommand.AddArgument(markAsInProgressCommandArgument);
+      markAsInProgressCommand.SetHandler(
+        _taskManager.MarkTaskAsInProgress,
+        markAsInProgressCommandArgument
+      );
+
+
       var updateCommand = new Command("update", "Update a task");
       var updateCommandIdArgument = new Argument<int>(
         "id",
@@ -87,6 +90,7 @@ namespace TaskTrackerCLI
           "add <title> - Add a new task\n" +
           "remove <id> - Remove a task\n" +
           "mark-as-completed <id> - Mark a task as completed\n" +
+          "mark-as-in-progress <id> - Mark a task as in progress\n" +
           "update <id> <title> - Update a task\n" +
           "help - Show help");
       });
@@ -95,6 +99,7 @@ namespace TaskTrackerCLI
       rootCommand.AddCommand(addCommand);
       rootCommand.AddCommand(removeCommand);
       rootCommand.AddCommand(markAsCompletedCommand);
+      rootCommand.AddCommand(markAsInProgressCommand);
       rootCommand.AddCommand(updateCommand);
       rootCommand.AddCommand(helpCommand);
 
