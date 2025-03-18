@@ -8,6 +8,10 @@ Before you begin, ensure you have the following installed:
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
 - Git (for cloning the repository)
 
+## Project URL 
+https://github.com/nahom-habtamu/TaskTrackerCLI
+
+
 ## Getting Started
 
 ### Option 1: Run Locally
@@ -111,7 +115,7 @@ The tests use an `InMemoryStorageManager` that initializes with three default ta
 - "In Progress Task 2" (IN_PROGRESS status)
 - "Completed Task 3" (COMPLETED status)
 
-Each test method includes a `CleanUp()` call to reset the test data to this initial state.
+Each test method that perform mutation includes a `CleanUp()` call to reset the test data to this initial state.
 
 ## Dependencies
 
