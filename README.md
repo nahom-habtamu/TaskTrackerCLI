@@ -9,7 +9,7 @@ Before you begin, ensure you have the following installed:
 - Git (for cloning the repository)
 
 ## Project URL 
-https://github.com/nahom-habtamu/TaskTrackerCLI
+https://roadmap.sh/projects/task-tracker
 
 
 ## Getting Started
