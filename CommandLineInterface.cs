@@ -88,15 +88,32 @@ namespace TaskTrackerCLI
       var helpCommand = new Command("help", "Show help");
       helpCommand.SetHandler(() =>
       {
-        Console.WriteLine("Task Tracker CLI Tool - A versatile command line interface for managing tasks" +
-          "\nAvailable commands:\n" +
-          "list - List all tasks\n" +
-          "add <title> - Add a new task\n" +
-          "remove <id> - Remove a task\n" +
-          "mark-as-completed <id> - Mark a task as completed\n" +
-          "mark-as-in-progress <id> - Mark a task as in progress\n" +
-          "update <id> <title> - Update a task\n" +
-          "help - Show help");
+        var helpText = $@"
+          Task Tracker CLI
+          ===============
+
+          A versatile command line interface for managing tasks
+
+          Commands:
+            list [filter]               List tasks (filter: all, completed, in-progress)
+            add <title>                 Add a new task
+            remove <id>                 Remove a task by ID
+            update <id> <title>         Update a task's title
+            
+          Status Commands:
+            mark-as-completed <id>      Mark a task as completed
+            mark-as-in-progress <id>    Mark a task as in progress
+
+          General:
+            help                        Show this help message
+
+          Examples:
+            task-tracker add ""Buy groceries""
+            task-tracker list completed
+            task-tracker mark-as-completed 1
+            task-tracker update 1 ""Buy more groceries""
+          ";
+        Console.WriteLine(helpText);
       });
 
       rootCommand.AddCommand(listCommand);
