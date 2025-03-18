@@ -1,6 +1,5 @@
-# TaskTrackerCLI
-
-A command-line interface application for managing tasks, built with C# and .NET 8.0.
+# Task Tracker
+Sample solution for the [task-tracker](https://roadmap.sh/projects/task-tracker) challenge from [roadmap.sh](https://roadmap.sh/) built with dotnet 8
 
 ## Prerequisites
 
@@ -8,8 +7,7 @@ Before you begin, ensure you have the following installed:
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
 - Git (for cloning the repository)
 
-## Project URL 
-https://roadmap.sh/projects/task-tracker
+
 
 
 ## Getting Started
