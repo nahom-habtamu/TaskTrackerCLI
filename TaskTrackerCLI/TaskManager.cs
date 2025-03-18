@@ -1,8 +1,8 @@
 namespace TaskTrackerCLI
 {
-  public class TaskManager(StorageManager storageManager)
+  public class TaskManager(IStorageManager storageManager)
   {
-    private readonly StorageManager _storageManager = storageManager;
+    private readonly IStorageManager _storageManager = storageManager;
 
     public void AddTask(Task task)
     {
@@ -34,30 +34,15 @@ namespace TaskTrackerCLI
       Console.WriteLine($"✓ Task marked as in progress");
     }
 
-    public void ListTasks(string filterCriteria = "all")
+    public List<Task> GetTasksByFilterCriteria(string filterCriteria = "all")
     {
       if (filterCriteria != "all" && filterCriteria != "completed" && filterCriteria != "in-progress")
       {
         Console.WriteLine("Invalid filter criteria. Please use 'all', 'completed', or 'in-progress'.");
-        return;
+        return [];
       }
+      return _storageManager.GetTasks(filterCriteria);
 
-      var tasks = _storageManager.GetTasks(filterCriteria);
-
-      if (tasks.Count == 0)
-      {
-        Console.WriteLine("No tasks found.");
-        return;
-      }
-
-      Console.WriteLine("\nTask List:");
-      Console.WriteLine("----------------------------------------");
-      foreach (var task in tasks)
-      {
-        string status = task.Status == "COMPLETED" ? "[✓]" : task.Status == "IN_PROGRESS" ? "[⚙️]" : "[ ]";
-        Console.WriteLine($"{task.Id}.{task.Title} {status}");
-      }
-      Console.WriteLine("----------------------------------------\n");
     }
 
   }

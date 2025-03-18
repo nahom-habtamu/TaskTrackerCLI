@@ -18,7 +18,26 @@ namespace TaskTrackerCLI
         "filterCriteria",
         description: "A filter criteria to list the tasks (all, completed, in-progress)");
       listCommand.AddArgument(listCommandArgument);
-      listCommand.SetHandler(_taskManager.ListTasks, listCommandArgument);
+      listCommand.SetHandler(
+        filterCriteria =>
+        {
+          var tasks = _taskManager.GetTasksByFilterCriteria(filterCriteria);
+          if (tasks.Count == 0)
+          {
+            Console.WriteLine("No tasks found.");
+            return;
+          }
+          Console.WriteLine("\nTask List:");
+          Console.WriteLine("----------------------------------------");
+          foreach (var task in tasks)
+          {
+            string status = task.Status == "COMPLETED" ? "[✓]" : task.Status == "IN_PROGRESS" ? "[⚙️]" : "[ ]";
+            Console.WriteLine($"{task.Id}.{task.Title} {status}");
+          }
+          Console.WriteLine("----------------------------------------\n");
+        },
+        listCommandArgument
+      );
 
 
       var addCommand = new Command("add", "Add a new task");
